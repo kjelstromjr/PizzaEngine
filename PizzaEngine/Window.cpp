@@ -3,7 +3,6 @@
 bool running = true;
 
 Render_State render_state;
-Render_State nextFrame;
 
 HDC* something = NULL;
 
@@ -168,6 +167,7 @@ int Window::getHeight() {
 
 void render(bool* run, Handler* h, int frames) {
 	Renderer::setRenderState(render_state);
+	Render_State nextFrame;
 	while (*run) {
 		Sleep(1000 / frames);
 		Renderer::clearScreen(0xffffff);

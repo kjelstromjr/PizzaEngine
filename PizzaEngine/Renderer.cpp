@@ -17,12 +17,15 @@ void Renderer::renderBackground() {
 }
 
 void Renderer::clearScreen(unsigned int color) {
+	
 	unsigned int* pixel = (unsigned int*)render_state.memory;
 	for (int y = 0; y < render_state.height; y++) {
 		for (int x = 0; x < render_state.width; x++) {
 			*pixel++ = color;
 		}
 	}
+	
+	//memset((unsigned int*)render_state.memory, color, render_state.width * render_state.height);
 }
 
 void Renderer::drawPixel(int x, int y, unsigned int color) {
