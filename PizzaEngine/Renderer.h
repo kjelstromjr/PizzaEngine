@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Render.h";
+#include <cmath>
 
 #define WHITE		0xFFFFFF
 #define BLACK		0x00

@@ -191,6 +191,8 @@ void Window::start() {
 
 	double elapsed_seconds = 0.0;
 
+	POINT p;
+
 	while (running) {
 
 		start = std::chrono::system_clock::now();
@@ -227,6 +229,12 @@ void Window::start() {
 					DispatchMessage(&message);
 				}
 			}
+		}
+
+		if (GetCursorPos(&p)) {
+			ScreenToClient(Window::thisWindow, &p);
+			Mouse::setPos(p.x, p.y);
+			std::cout << "X: " << p.x << " Y: " << p.y << std::endl;
 		}
 
 		// Simulate

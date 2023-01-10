@@ -131,6 +131,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Handler.h" />
     <ClInclude Include="KeyBoard.h" />
+    <ClInclude Include="Mouse.h" />
     <ClInclude Include="Pizza.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RenderState.h" />
@@ -144,6 +145,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Handler.cpp" />
     <ClCompile Include="KeyBoard.cpp" />
+    <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Pizza.cpp" />
     <ClCompile Include="Render.h" />
     <ClCompile Include="Renderer.cpp">

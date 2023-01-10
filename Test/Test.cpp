@@ -37,6 +37,7 @@ class Box : public GameObject {
 		void draw() {
 			setColor(color);
 			fillRect();
+			Renderer::drawLine(10, 10, Mouse::getX(), Mouse::getY(), BLUE);
 		}
 };
 

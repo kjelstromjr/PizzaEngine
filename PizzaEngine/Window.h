@@ -5,8 +5,11 @@
 #include "Handler.h"
 #include "KeyBoard.h"
 #include "Timer.h"
+#include "Mouse.h"
 #include <thread>
 #include <functional>
+
+#define _WIN32_WINNT 0x0500
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 

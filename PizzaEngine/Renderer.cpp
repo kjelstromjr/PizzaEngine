@@ -1,5 +1,4 @@
 #include "Renderer.h"
-#include <iostream>
 
 Render_State Renderer::render_state;
 
@@ -56,26 +55,17 @@ void Renderer::fillRect(int x, int y, int width, int height, unsigned int color)
 void Renderer::drawLine(int x1, int y1, int x2, int y2, unsigned int color) {
 	int dx = x2 - x1;
 	int dy = y2 - y1;
-	int d = 2 * dy - dx;
-	int incrE = 2 * dy;
-	int incrNE = 2 * (dy - dx);
-	int x = x1;
-	int y = y1;
 
-	// Draw the first point
-	drawPixel(x, y, color);
+	int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
 
-	while (x < x2) {
-		if (d <= 0) {
-			// Choose E
-			d += incrE;
-			x++;
-		} else {
-			// Choose NE
-			d += incrNE;
-			x++;
-			y++;
-		}
+	float Xinc = dx / (float)steps;
+	float Yinc = dy / (float)steps;
+
+	float x = x1;
+	float y = y1;
+	for (int i = 0; i <= steps; i++) {
 		drawPixel(x, y, color);
+		x += Xinc;
+		y += Yinc;
 	}
 }
