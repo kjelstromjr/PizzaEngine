@@ -167,11 +167,12 @@ int Window::getHeight() {
 }
 
 void render(bool* run, Handler* h, int frames) {
+	Renderer::setRenderState(render_state);
 	while (*run) {
-		nextFrame = render_state;
+		Sleep(1000 / frames);
 		Renderer::clearScreen(0xffffff);
 		h->draw();
-		Sleep(1000 / frames);
+		nextFrame = render_state;
 		StretchDIBits(*something, 0, 0, nextFrame.width, nextFrame.height, 0, 0, nextFrame.width, nextFrame.height, nextFrame.memory, &nextFrame.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
 	}
 }
@@ -229,7 +230,6 @@ void Window::start() {
 		}
 
 		// Simulate
-		Renderer::setRenderState(render_state);
 
 		handler->update();
 
