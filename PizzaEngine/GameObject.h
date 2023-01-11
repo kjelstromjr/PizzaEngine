@@ -1,8 +1,9 @@
 #pragma once
 
-#include "Runnable.h";
-#include "Drawable.h";
-#include "Renderer.h";
+#include "Runnable.h"
+#include "Drawable.h"
+#include "Renderer.h"
+#include "Mouse.h"
 #include <iostream>
 
 class GameObject : public Runnable, public Drawable {
@@ -24,6 +25,7 @@ class GameObject : public Runnable, public Drawable {
 		void fillRect();
 		void setColor(unsigned int color);
 		void setRect(float x, float y, float width, float height);
+		bool isMouseOver();
 	private:
 		unsigned int color;
 };

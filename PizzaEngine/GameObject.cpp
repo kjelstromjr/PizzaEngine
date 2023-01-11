@@ -66,3 +66,13 @@ void GameObject::setRect(float x, float y, float width, float height) {
 	this->width = width;
 	this->height = height;
 }
+
+bool GameObject::isMouseOver() {
+	int x = Mouse::getX();
+	int y = Mouse::getY();
+	if (x > this->x && x < this->x + this->width && y > this->y && y < this->y + this->height) {
+		return true;
+	} else {
+		return false;
+	}
+}

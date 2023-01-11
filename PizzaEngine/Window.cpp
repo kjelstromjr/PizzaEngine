@@ -234,7 +234,7 @@ void Window::start() {
 		if (GetCursorPos(&p)) {
 			ScreenToClient(Window::thisWindow, &p);
 			Mouse::setPos(p.x, p.y);
-			std::cout << "X: " << p.x << " Y: " << p.y << std::endl;
+			//std::cout << "X: " << p.x << " Y: " << p.y << std::endl;
 		}
 
 		// Simulate

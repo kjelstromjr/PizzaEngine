@@ -3,7 +3,7 @@
 
 class Box : public GameObject {
 	public:
-		unsigned int color = 0xFFA500;
+		unsigned int color = ORANGE;
 		float speed;
 		float velocity, acceleration;
 		Box(int x, int y) {
@@ -32,12 +32,17 @@ class Box : public GameObject {
 			} else if (KeyBoard::isDown(RIGHT)) {
 				x += speed;
 			}
+
+			if (isMouseOver()) {
+				color = BLUE;
+			} else {
+				color = ORANGE;
+			}
 			
 		}
 		void draw() {
 			setColor(color);
 			fillRect();
-			Renderer::drawLine(10, 10, Mouse::getX(), Mouse::getY(), BLUE);
 		}
 };
 
