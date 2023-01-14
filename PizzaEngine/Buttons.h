@@ -1,3 +1,5 @@
+#pragma once
+
 struct ButtonState {
 	bool isDown;
 	bool changed;

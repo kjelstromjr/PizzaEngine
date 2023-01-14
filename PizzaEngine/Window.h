@@ -6,6 +6,7 @@
 #include "KeyBoard.h"
 #include "Timer.h"
 #include "Mouse.h"
+#include "Clickable.h"
 #include <thread>
 #include <functional>
 

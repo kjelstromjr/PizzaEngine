@@ -1,4 +1,5 @@
 #pragma once
+
 class Timer {
 	public:
 		static float timeElapsed();

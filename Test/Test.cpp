@@ -1,7 +1,7 @@
 #include "Pizza.h"
 #include <iostream>
 
-class Box : public GameObject {
+class Box : public GameObject, public Clickable {
 	public:
 		unsigned int color = ORANGE;
 		float speed;
@@ -43,6 +43,9 @@ class Box : public GameObject {
 		void draw() {
 			setColor(color);
 			fillRect();
+		}
+		void onClick() {
+			color = GREEN;
 		}
 };
 

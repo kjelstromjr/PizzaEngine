@@ -223,6 +223,19 @@ void Window::start() {
 					}
 					*/
 				} break;
+				case WM_LBUTTONDOWN: {
+					GameObject* object;
+					Clickable* c;
+					for (int i = 0; i < handler->size(); i++) {
+						object = handler->getObject(i);
+						if (dynamic_cast<Clickable*>(object) != nullptr) {
+							c = dynamic_cast<Clickable*>(object);
+							if (c->useClick(object)) {
+								break;
+							}
+						}
+					}
+				} break;
 
 				default: {
 					TranslateMessage(&message);
