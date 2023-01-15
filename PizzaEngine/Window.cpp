@@ -1,4 +1,5 @@
 #include "Window.h"
+#include <d3d11.h>
 
 bool running = true;
 
@@ -165,15 +166,20 @@ int Window::getHeight() {
 	return Window::height;
 }
 
+void draw(Render_State nextFrame, Handler* h) {
+	Renderer::clearScreen(0xffffff);
+	h->draw();
+	nextFrame = render_state;
+	StretchDIBits(*something, 0, 0, nextFrame.width, nextFrame.height, 0, 0, nextFrame.width, nextFrame.height, nextFrame.memory, &nextFrame.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
+}
+
 void render(bool* run, Handler* h, int frames) {
 	Renderer::setRenderState(render_state);
 	Render_State nextFrame;
 	while (*run) {
+		std::thread th(std::bind(draw, nextFrame, h));
 		Sleep(1000 / frames);
-		Renderer::clearScreen(0xffffff);
-		h->draw();
-		nextFrame = render_state;
-		StretchDIBits(*something, 0, 0, nextFrame.width, nextFrame.height, 0, 0, nextFrame.width, nextFrame.height, nextFrame.memory, &nextFrame.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
+		th.join();
 	}
 }
 
