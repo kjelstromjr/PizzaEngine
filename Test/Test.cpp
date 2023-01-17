@@ -10,12 +10,12 @@ class Box : public GameObject, public Clickable {
 			setRect(x, y, 50, 50);
 			speed = 0;
 			velocity = 0.0;
-			acceleration = 0.001;
+			acceleration = 0.0001;
 		}
 		void update() {
 			/*
-			velocity += acceleration;
-			x += velocity;
+			velocity += acceleration * Timer::timeElapsed();
+			x += velocity * Timer::timeElapsed();
 			if (x > Window::getWidth()) {
 				x = 0;
 			}

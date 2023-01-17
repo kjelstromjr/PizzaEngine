@@ -173,13 +173,66 @@ void draw(Render_State nextFrame, Handler* h) {
 	StretchDIBits(*something, 0, 0, nextFrame.width, nextFrame.height, 0, 0, nextFrame.width, nextFrame.height, nextFrame.memory, &nextFrame.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
 }
 
-void render(bool* run, Handler* h, int frames) {
+void render(bool* run, Handler* h, int frames, HWND win) {
 	Renderer::setRenderState(render_state);
 	Render_State nextFrame;
+	/*
 	while (*run) {
 		std::thread th(std::bind(draw, nextFrame, h));
 		Sleep(1000 / frames);
 		th.join();
+	}
+	*/
+
+
+	DEVMODE devMode;
+	devMode.dmSize = sizeof(DEVMODE);
+
+	// Get the refresh rate of the primary monitor
+	if (EnumDisplaySettings(NULL, ENUM_CURRENT_SETTINGS, &devMode)) {
+		int refreshRate = devMode.dmDisplayFrequency;
+		std::cout << "Refresh rate: " << refreshRate << std::endl;
+
+		// Get the number of counts per second of the performance counter
+		LARGE_INTEGER countsPerSecond;
+		QueryPerformanceFrequency(&countsPerSecond);
+
+		// Calculate the number of counts per frame
+		double countsPerFrame = countsPerSecond.QuadPart / (double)refreshRate;
+
+		// Get the current value of the performance counter
+		LARGE_INTEGER currentCount;
+		QueryPerformanceCounter(&currentCount);
+
+		// Start the animation loop
+		int frame = 0;
+		while (*run) {
+			// Update the animation
+			//std::cout << "Frame: " << frame << std::endl;
+			//frame++;
+
+			Renderer::clearScreen(0xffffff);
+			h->draw();
+			nextFrame = render_state;
+			StretchDIBits(*something, 0, 0, nextFrame.width, nextFrame.height, 0, 0, nextFrame.width, nextFrame.height, nextFrame.memory, &nextFrame.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
+
+			// Get the current value of the performance counter
+			LARGE_INTEGER newCount;
+			QueryPerformanceCounter(&newCount);
+
+			// Calculate the number of counts since the last frame
+			__int64 countDelta = newCount.QuadPart - currentCount.QuadPart;
+
+			// If the number of counts since the last frame is less than the number of counts per frame, sleep for the remaining time
+			if (countDelta < countsPerFrame) {
+				Sleep((DWORD)(1000.0 * (countsPerFrame - countDelta) / countsPerSecond.QuadPart));
+			}
+
+			// Get the current value of the performance counter
+			currentCount = newCount;
+		}
+	} else {
+		std::cout << "Failed to get refresh rate" << std::endl;
 	}
 }
 
@@ -189,7 +242,7 @@ void Window::start() {
 
 	something = &(Window::thisHDC);
 
-	std::thread t(std::bind(render, &running, handler, fps));
+	std::thread t(std::bind(render, &running, handler, fps, Window::thisWindow));
 
 	auto start = std::chrono::system_clock::now();
 	auto end = std::chrono::system_clock::now();
@@ -203,7 +256,7 @@ void Window::start() {
 
 		start = std::chrono::system_clock::now();
 
-		Sleep(1);
+		//Sleep(1);
 
 		// Input
 		MSG message;
@@ -280,7 +333,6 @@ void Window::start() {
 		//double elapsed_seconds = 0;
 
 		Timer::setTimeElapsed(elapsed_seconds * 1000);
-
 	}
 
 	t.join();
