@@ -1,3 +1,5 @@
+#pragma comment(lib, "winmm.lib")
+
 #include "Window.h"
 #include <d3d11.h>
 
@@ -207,6 +209,7 @@ void render(bool* run, Handler* h, int frames, HWND win) {
 		// Start the animation loop
 		int frame = 0;
 		while (*run) {
+			timeBeginPeriod(1);
 			// Update the animation
 			//std::cout << "Frame: " << frame << std::endl;
 			//frame++;
@@ -230,6 +233,8 @@ void render(bool* run, Handler* h, int frames, HWND win) {
 
 			// Get the current value of the performance counter
 			currentCount = newCount;
+
+			timeEndPeriod(1);
 		}
 	} else {
 		std::cout << "Failed to get refresh rate" << std::endl;
