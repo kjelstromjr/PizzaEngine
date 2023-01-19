@@ -4,15 +4,21 @@
 class Box : public GameObject, public Clickable {
 	public:
 		unsigned int color = ORANGE;
-		float speed;
-		float velocity, acceleration;
+		Vector mouse;
+		//float speed;
+		//float velocity, acceleration;
 		Box(int x, int y) {
 			setRect(x, y, 50, 50);
-			speed = 0;
-			velocity = 0.0;
-			acceleration = 0.0001;
+			//speed = 0;
+			//velocity = 0.0;
+			//acceleration = 0.0001;
 		}
 		void update() {
+			mouse.x = Mouse::getX() - Window::getWidth() / 2;
+			mouse.y = Mouse::getY() - Window::getHeight() / 2;
+
+			mouse.normalize();
+			mouse *= 50;
 			/*
 			velocity += acceleration * Timer::timeElapsed();
 			x += velocity * Timer::timeElapsed();
@@ -20,7 +26,7 @@ class Box : public GameObject, public Clickable {
 				x = 0;
 			}
 			*/
-			
+			/*
 			speed = 0.25 * Timer::timeElapsed();
 			if (KeyBoard::isDown(UP)) {
 				y -= speed;
@@ -38,11 +44,12 @@ class Box : public GameObject, public Clickable {
 			} else {
 				color = ORANGE;
 			}
-			
+			*/
 		}
 		void draw() {
 			setColor(color);
-			fillRect();
+			//fillRect();
+			Renderer::drawLine(Window::getWidth() / 2, Window::getHeight() / 2, mouse.x + (Window::getWidth() / 2), mouse.y + (Window::getHeight() / 2), color);
 		}
 		void onClick() {
 			color = GREEN;

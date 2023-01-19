@@ -5,10 +5,13 @@
 #include "Renderer.h"
 #include "Mouse.h"
 #include <iostream>
+#include "Vector.h"
+#include "Timer.h"
 
 class GameObject : public Runnable, public Drawable {
 	public:
 		GameObject();
+		void updatePosition();
 		virtual void update();
 		virtual void draw();
 		float getX();
@@ -20,8 +23,11 @@ class GameObject : public Runnable, public Drawable {
 		void setWidth(float width);
 		void setHeight(float height);
 		unsigned int getColor();
+		Vector position;
+		Vector velocity;
+		Vector acceleration;
 	protected:
-		float x, y, width, height;
+		float width, height;
 		void fillRect();
 		void setColor(unsigned int color);
 		void setRect(float x, float y, float width, float height);

@@ -2,11 +2,14 @@
 
 GameObject::GameObject() {
 	std::cout << "Created Object";
-	x = 0;
-	y = 0;
 	width = 0;
 	height = 0;
 	color = 0x00;
+}
+
+void GameObject::updatePosition() {
+	velocity += acceleration * Timer::timeElapsed();
+	position += velocity * Timer::timeElapsed();
 }
 
 void GameObject::update() {
@@ -17,11 +20,11 @@ void GameObject::draw() {
 }
 
 float GameObject::getX() {
-	return x;
+	return position.x;
 }
 
 float GameObject::getY() {
-	return y;
+	return position.y;
 }
 
 float GameObject::getWidth() {
@@ -33,11 +36,11 @@ float GameObject::getHeight() {
 }
 
 void GameObject::setX(float x) {
-	this->x = x;
+	position.x = x;
 }
 
 void GameObject::setY(float y) {
-	this->y = y;
+	position.y = y;
 }
 
 void GameObject::setWidth(float width) {
@@ -53,7 +56,7 @@ unsigned int GameObject::getColor() {
 }
 
 void GameObject::fillRect() {
-	Renderer::fillRect(x, y, width, height, color);
+	Renderer::fillRect(position.x, position.y, width, height, color);
 }
 
 void GameObject::setColor(unsigned int color) {
@@ -61,8 +64,8 @@ void GameObject::setColor(unsigned int color) {
 }
 
 void GameObject::setRect(float x, float y, float width, float height) {
-	this->x = x;
-	this->y = y;
+	position.x = x;
+	position.y = y;
 	this->width = width;
 	this->height = height;
 }
@@ -70,7 +73,7 @@ void GameObject::setRect(float x, float y, float width, float height) {
 bool GameObject::isMouseOver() {
 	int x = Mouse::getX();
 	int y = Mouse::getY();
-	if (x > this->x && x < this->x + this->width && y > this->y && y < this->y + this->height) {
+	if (x > position.x && x < position.x + this->width && y > position.y && y < position.y + this->height) {
 		return true;
 	} else {
 		return false;

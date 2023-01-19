@@ -140,6 +140,7 @@
     <ClInclude Include="Runnable.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Util.h" />
+    <ClInclude Include="Vector.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +162,7 @@
     <ClCompile Include="RenderState.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Util.cpp" />
+    <ClCompile Include="Vector.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -40,6 +40,7 @@ int Handler::size() {
 
 void Handler::update() {
 	for (int i = 0; i < s; i++) {
+		objects[i]->updatePosition();
 		objects[i]->update();
 	}
 }
