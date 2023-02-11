@@ -3,6 +3,8 @@
 #include <iostream>
 #include "Window.h"
 #include "Util.h"
+#include "Xbox.h"
+#include "Physical.h"
 
 using namespace std;
 
@@ -17,6 +19,7 @@ class Pizza {
 		void showConsole();
 		void setFPS(int fps);
 		int getFPS();
+		Physical* game;
 
 	private:
 		Window* w;

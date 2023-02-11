@@ -4,15 +4,51 @@ GameObject::GameObject() {
 	std::cout << "Created Object";
 	width = 0;
 	height = 0;
+	mass = 10;
 	color = 0x00;
 }
 
 void GameObject::updatePosition() {
+	float limit = acceleration.getLimit();
+	if (limit != -1) {
+		if (acceleration.x > limit) {
+			acceleration.x = limit;
+		}
+		if (acceleration.y > limit) {
+			acceleration.y = limit;
+		}
+	}
+
 	velocity += acceleration * Timer::timeElapsed();
+
+	limit = velocity.getLimit();
+	if (limit != -1) {
+		if (velocity.x > limit) {
+			velocity.x = limit;
+		}
+		if (velocity.y > limit) {
+			velocity.y = limit;
+		}
+	}
 	position += velocity * Timer::timeElapsed();
+
+	limit = position.getLimit();
+	if (limit != -1) {
+		if (position.x > limit) {
+			position.x = limit;
+		}
+		if (position.y > limit) {
+			position.y = limit;
+		}
+	}
 }
 
 void GameObject::update() {
+}
+
+void GameObject::updateVectors(Physical* engine) {
+	this->acceleration *= 0;
+	this->acceleration += engine->gravity;
 }
 
 void GameObject::draw() {
@@ -53,6 +89,22 @@ void GameObject::setHeight(float height) {
 
 unsigned int GameObject::getColor() {
 	return color;
+}
+
+void GameObject::setMass(float mass) {
+	this->mass = mass;
+}
+
+float GameObject::getMass() {
+	return mass;
+}
+
+void GameObject::applyForce(Vector force) {
+	acceleration += force / mass;
+}
+
+bool GameObject::isIntersecting(GameObject* object) {
+	return !(getX() > object->getX() + object->getWidth() || getX() + getWidth() < object->getX() || getY() > object->getY() + object->getHeight() || getY() + getHeight() < object->getY());
 }
 
 void GameObject::fillRect() {

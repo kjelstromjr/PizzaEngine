@@ -3,10 +3,11 @@
 #include <list>
 #include "GameObject.h"
 #include <iostream>
+#include "Physical.h"
 
 class Handler {
 	public:
-		Handler();
+		Handler(Physical* engine);
 		void addObject(GameObject* object);
 		void removeObject(GameObject* object);
 		GameObject* getObject(int i);
@@ -18,4 +19,5 @@ class Handler {
 		GameObject** objects;
 		bool set;
 		int s = 1;
+		Physical* engine;
 };

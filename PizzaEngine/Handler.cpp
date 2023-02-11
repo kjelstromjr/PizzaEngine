@@ -1,8 +1,9 @@
 #include "Handler.h"
 
-Handler::Handler() {
+Handler::Handler(Physical* engine) {
 	objects = new GameObject*[1];
 	set = false;
+	this->engine = engine;
 }
 
 void Handler::addObject(GameObject* object) {
@@ -40,8 +41,9 @@ int Handler::size() {
 
 void Handler::update() {
 	for (int i = 0; i < s; i++) {
-		objects[i]->updatePosition();
+		objects[i]->updateVectors(engine);
 		objects[i]->update();
+		objects[i]->updatePosition();
 	}
 }
 

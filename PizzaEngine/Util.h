@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <windows.h>
+#include <XInput.h>
+#pragma comment(lib, "Xinput.lib")
 
 using namespace std;
 

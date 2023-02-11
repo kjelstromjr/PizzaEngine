@@ -214,7 +214,7 @@ void render(bool* run, Handler* h, int frames, HWND win) {
 			//std::cout << "Frame: " << frame << std::endl;
 			//frame++;
 
-			Renderer::clearScreen(0xffffff);
+			Renderer::clearScreen(0x00);
 			h->draw();
 			nextFrame = render_state;
 			StretchDIBits(*something, 0, 0, nextFrame.width, nextFrame.height, 0, 0, nextFrame.width, nextFrame.height, nextFrame.memory, &nextFrame.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
@@ -261,7 +261,7 @@ void Window::start() {
 
 		start = std::chrono::system_clock::now();
 
-		//Sleep(1);
+		Sleep(1);
 
 		// Input
 		MSG message;

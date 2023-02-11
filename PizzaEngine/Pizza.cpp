@@ -1,25 +1,29 @@
 #include "Pizza.h"
 
 Pizza::Pizza(LPCWSTR title) {
-	h = new Handler();
+	game = new Physical();
+	h = new Handler(this->game);
 	w = new Window(title, h);
 	w->hideConsole();
 }
 
 Pizza::Pizza(LPCWSTR title, bool fullscreen) {
-	h = new Handler();
+	game = new Physical();
+	h = new Handler(this->game);
 	w = new Window(title, fullscreen, h);
 	w->hideConsole();
 }
 
 Pizza::Pizza(LPCWSTR title, int width, int height) {
-	h = new Handler();
+	game = new Physical();
+	h = new Handler(this->game);
 	w = new Window(title, width, height, h);
 	w->hideConsole();
 }
 
 Pizza::Pizza(LPCWSTR title, int width, int height, bool fullscreen) {
-	h = new Handler();
+	game = new Physical();
+	h = new Handler(this->game);
 	w = new Window(title, width, height, fullscreen, h);
 	w->hideConsole();
 }
