@@ -1,4 +1,6 @@
 #pragma once
+#ifndef PIZZA_H
+#define PIZZA_H
 
 #include <iostream>
 #include "Window.h"
@@ -25,3 +27,5 @@ class Pizza {
 		Window* w;
 		Handler* h;
 };
+
+#endif

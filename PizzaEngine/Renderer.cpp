@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include <iostream>
 
 Render_State Renderer::render_state;
 

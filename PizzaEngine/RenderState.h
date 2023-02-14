@@ -1,4 +1,6 @@
 #pragma once
+#ifndef RENDERSTATE_H
+#define RENDERSTATE_H
 
 #include <windows.h>
 
@@ -10,3 +12,5 @@ class RenderState {
 		RenderState();
 		~RenderState();
 };
+
+#endif

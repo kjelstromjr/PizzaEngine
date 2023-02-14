@@ -1,4 +1,6 @@
 #pragma once
+#ifndef TIMER_H
+#define TIMER_H
 
 class Timer {
 	public:
@@ -8,3 +10,5 @@ class Timer {
 	private:
 		static float time;
 };
+
+#endif

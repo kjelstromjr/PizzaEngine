@@ -19,6 +19,10 @@ Vector::Vector(float x, float y, float l) {
 	this->l = l;
 }
 
+Vector Vector::get() {
+	return Vector(x, y);
+}
+
 float Vector::mag() {
 	return sqrt(this->x * this->x + this->y * this->y);
 }

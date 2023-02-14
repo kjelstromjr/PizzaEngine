@@ -1,4 +1,6 @@
 #pragma once
+#ifndef WINDOW_H
+#define WINDOW_H
 
 #include <iostream>
 #include <chrono>
@@ -41,4 +43,7 @@ class Window {
 		Handler* handler;
 		bool hasSetup;
 		int fps = 60;
+		static bool isFull;
 };
+
+#endif

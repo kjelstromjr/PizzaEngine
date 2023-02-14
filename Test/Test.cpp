@@ -1,6 +1,7 @@
 #include "Pizza.h"
 #include <iostream>
 #include "Physical.h"
+#include "Water.h"
 
 GameObject* other;
 
@@ -159,15 +160,24 @@ int main() {
 	}
 	*/
 
-	Physical* p = new Physical();
-	p->gravity = Vector(0, 10);
-
+	//Water* water = new Water(100, 100, 100, 100, 0.1);
 
 	Pizza* engine = new Pizza(L"Hello there");
-	//game->showConsole();
-	engine->addObject(new Box(10, 100, 10));
-	other = new Box(10, 100, 100);
+
+	Fluid* f = new Fluid(0, Window::getHeight() - 300, Window::getWidth(), Window::getHeight(), 0.1);
+	f->stable = true;
+	f->collidable = false;
+
+	//engine->showConsole();
+	//engine->addObject(f);
+	engine->addObject(new Box(10, 100, 20));
+	other = new Box(100, 100, 100);
+	//engine->addObject(water);
 	engine->addObject(other);
+	engine->addObject(new Box(200, 200, 5));
+
+
+
 	engine->game->gravity = Vector(0, 0.0001);
 	//engine->setFPS(120);
 	engine->start();

@@ -1,9 +1,11 @@
 #include "Mouse.h"
+#include <iostream>
 
 int Mouse::x = 0;
 int Mouse::y = 0;
 
 int Mouse::getX() {
+    //std::cout << "X: " << Mouse::x << " Y: " << Mouse::y << "\n";
     return Mouse::x;
 }
 

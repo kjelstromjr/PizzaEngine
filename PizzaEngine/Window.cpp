@@ -12,6 +12,8 @@ HDC* something = NULL;
 int Window::width = 0;
 int Window::height = 0;
 
+bool Window::isFull = false;
+
 LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 	LRESULT result = 0;
 
@@ -69,6 +71,8 @@ Window::Window(LPCWSTR title, Handler* handler) : m_hInstance(GetModuleHandle(nu
 	HWND window = CreateWindow(window_class.lpszClassName, title, WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, Window::width, Window::height, 0, 0, m_hInstance, 0);
 	HDC hdc = GetDC(window);
 
+	isFull = false;
+
 	this->handler = handler;
 	std::cout << this->handler;
 	setup(window, hdc);
@@ -85,18 +89,24 @@ Window::Window(LPCWSTR title, bool fullscreen, Handler* handler) {
 	window_class.lpfnWndProc = window_callback;
 	// Register Class
 	RegisterClass(&window_class);
-	Window::width = 1280;
-	Window::height = 720;
 	// Create Window
 	//  WS_VISIBLE | WS_MAXIMIZE | WS_POPUPWINDOW - fullscreen
 
 	HWND window;
 
 	if (fullscreen) {
-		window = CreateWindow(window_class.lpszClassName, title, WS_VISIBLE | WS_MAXIMIZE | WS_POPUPWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, Window::width, Window::height, 0, 0, m_hInstance, 0);
+		window = CreateWindow(window_class.lpszClassName, title, WS_POPUP | WS_VISIBLE, 0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), 0, 0, m_hInstance, 0);
 	} else {
 		window = CreateWindow(window_class.lpszClassName, title, WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, Window::width, Window::height, 0, 0, m_hInstance, 0);
 	}
+
+	HWND wind = GetForegroundWindow(); // get the handle of the foreground window
+	RECT rect;
+	GetWindowRect(wind, &rect); // get the dimensions of the window
+	Window::width = rect.right - rect.left; // calculate the width of the window
+	Window::height = rect.bottom - rect.top; // calculate the height of the window
+
+	isFull = true;
 
 	HDC hdc = GetDC(window);
 
@@ -122,6 +132,8 @@ Window::Window(LPCWSTR title, int width, int height, Handler* handler) {
 	HWND window = CreateWindow(window_class.lpszClassName, title, WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, Window::width, Window::height, 0, 0, m_hInstance, 0);
 	HDC hdc = GetDC(window);
 
+	isFull = false;
+
 	this->handler = handler;
 	setup(window, hdc);
 }
@@ -144,10 +156,19 @@ Window::Window(LPCWSTR title, int width, int height, bool fullscreen, Handler* h
 	HWND window;
 
 	if (fullscreen) {
-		window = CreateWindow(window_class.lpszClassName, title, WS_VISIBLE | WS_MAXIMIZE | WS_POPUPWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, Window::width, Window::height, 0, 0, m_hInstance, 0);
+		window = CreateWindow(window_class.lpszClassName, title, WS_POPUP | WS_VISIBLE, 0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), 0, 0, m_hInstance, 0);
 	} else {
 		window = CreateWindow(window_class.lpszClassName, title, WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, Window::width, Window::height, 0, 0, m_hInstance, 0);
 	}
+
+	HWND wind = GetForegroundWindow(); // get the handle of the foreground window
+	RECT rect;
+	GetWindowRect(wind, &rect); // get the dimensions of the window
+	Window::width = rect.right - rect.left; // calculate the width of the window
+	Window::height = rect.bottom - rect.top; // calculate the height of the window
+
+	isFull = true;
+
 	HDC hdc = GetDC(window);
 
 	this->handler = handler;
@@ -161,11 +182,17 @@ Window::~Window() {
 }
 
 int Window::getWidth() {
+	if (isFull) {
+		return Window::width;
+	}
 	return Window::width;
 }
 
 int Window::getHeight() {
-	return Window::height;
+	if (isFull) {
+		return Window::height;
+	}
+	return Window::height - 40;
 }
 
 void draw(Render_State nextFrame, Handler* h) {

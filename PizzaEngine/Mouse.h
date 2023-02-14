@@ -1,4 +1,6 @@
 #pragma once
+#ifndef MOUSE_H
+#define MOUSE_H
 
 class Mouse {
 	public:
@@ -10,3 +12,5 @@ class Mouse {
 		static int x;
 		static int y;
 };
+
+#endif

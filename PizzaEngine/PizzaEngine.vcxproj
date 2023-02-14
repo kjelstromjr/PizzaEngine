@@ -128,12 +128,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Clickable.h" />
+    <ClInclude Include="Collidable.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="Fluid.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Handler.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="KeyBoard.h" />
+    <ClInclude Include="List.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Physical.h" />
     <ClInclude Include="Pizza.h" />
@@ -149,11 +151,13 @@
   <ItemGroup>
     <ClCompile Include="Buttons.h" />
     <ClCompile Include="Clickable.cpp" />
+    <ClCompile Include="Collidable.cpp" />
     <ClCompile Include="Fluid.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Handler.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="KeyBoard.cpp" />
+    <ClCompile Include="List.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Physical.cpp" />
     <ClCompile Include="Pizza.cpp" />

@@ -1,4 +1,6 @@
 #pragma once
+#ifndef XBOX_H
+#define XBOX_H
 
 #include "Util.h"
 
@@ -14,3 +16,5 @@ class Xbox {
 		bool isX();
 		bool isY();
 };
+
+#endif

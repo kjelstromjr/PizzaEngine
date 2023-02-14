@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef KEYBOARD_H
+#define KEYBOARD_H
+
 #include "Buttons.h"
 #include "Window.h"
 
@@ -12,3 +15,5 @@ class KeyBoard {
 	private:
 		static Input input;
 };
+
+#endif

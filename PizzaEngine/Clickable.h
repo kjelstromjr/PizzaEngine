@@ -1,4 +1,6 @@
 #pragma once
+#ifndef CLICKABLE_H
+#define CLICKABLE_H
 
 #include "GameObject.h"
 
@@ -7,3 +9,5 @@ class Clickable {
 		bool useClick(GameObject* object);
 		virtual void onClick();
 };
+
+#endif

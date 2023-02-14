@@ -1,4 +1,6 @@
 #pragma once
+#ifndef PHYSICAL_H
+#define PHYSICAL_H
 
 #include "Vector.h"
 
@@ -7,3 +9,5 @@ class Physical {
 		Physical();
 		Vector gravity;
 };
+
+#endif

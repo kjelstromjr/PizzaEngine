@@ -1,4 +1,6 @@
 #pragma once
+#ifndef VECTOR_H
+#define VECTOR_H
 
 #include <cmath>
 
@@ -8,6 +10,8 @@ struct Vector {
 	Vector();
 	Vector(float x, float y);
 	Vector(float x, float y, float l);
+
+	Vector get();
 
 	float mag();
 	void normalize();
@@ -27,3 +31,5 @@ struct Vector {
 	private:
 		float l;
 };
+
+#endif

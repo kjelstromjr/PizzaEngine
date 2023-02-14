@@ -1,4 +1,6 @@
 #pragma once
+#ifndef RENDERER_H
+#define RENDERER_H
 
 #include "Render.h";
 #include <cmath>
@@ -28,3 +30,5 @@ class Renderer {
 	private:
 		static Render_State render_state;
 };
+
+#endif

@@ -1,4 +1,6 @@
 #pragma once
+#ifndef BUTTONS_H
+#define BUTTONS_H
 
 struct ButtonState {
 	bool isDown;
@@ -17,3 +19,5 @@ enum Button {
 struct Input {
 	ButtonState buttons[COUNT];
 };
+
+#endif
