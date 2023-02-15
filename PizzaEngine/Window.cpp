@@ -185,7 +185,7 @@ int Window::getWidth() {
 	if (isFull) {
 		return Window::width;
 	}
-	return Window::width;
+	return Window::width - 18;
 }
 
 int Window::getHeight() {

@@ -17,7 +17,7 @@ class Box : public GameObject, public Clickable {
 		int vTime = 20;
 
 		Box(int x, int y, int mass) {
-			setRect(x, y, 50, 50);
+			setRect(x, y, 50 + 0.1 * mass, 50 + 0.1 * mass);
 			speed = 0;
 			this->mass = mass;
 			//velocity = 0.0;
@@ -175,6 +175,12 @@ int main() {
 	//engine->addObject(water);
 	engine->addObject(other);
 	engine->addObject(new Box(200, 200, 5));
+
+	GameObject* object = new GameObject(300, 300, 10, 10);
+	//engine->addObject(object);
+
+	for (int i = 0; i < 100; i += 4) {
+	}
 
 
 
