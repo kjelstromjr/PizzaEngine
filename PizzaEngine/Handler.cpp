@@ -13,6 +13,11 @@ Handler::~Handler() {
 		delete objects[i]; // Delete each GameObject in the array
 	}
 	delete[] objects; // Delete the objects array
+	for (int i = 0; i < fs; i++) {
+		delete fluids[i]; // Delete each GameObject in the array
+	}
+	delete[] fluids; // Delete the objects array
+	ImageLoader::clearCache();
 }
 
 void Handler::addObject(GameObject* object) {

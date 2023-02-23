@@ -127,13 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BufferedImage.h" />
     <ClInclude Include="Clickable.h" />
     <ClInclude Include="Collidable.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="Fluid.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Handler.h" />
-    <ClInclude Include="Image.h" />
+    <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="KeyBoard.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Mouse.h" />
@@ -142,6 +143,12 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RenderState.h" />
     <ClInclude Include="Runnable.h" />
+    <ClInclude Include="stb\stb_image.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="Vector.h" />
@@ -149,13 +156,14 @@
     <ClInclude Include="Xbox.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BufferedImage.cpp" />
     <ClCompile Include="Buttons.h" />
     <ClCompile Include="Clickable.cpp" />
     <ClCompile Include="Collidable.cpp" />
     <ClCompile Include="Fluid.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Handler.cpp" />
-    <ClCompile Include="Image.cpp" />
+    <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="KeyBoard.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="Mouse.cpp" />

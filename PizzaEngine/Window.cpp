@@ -45,6 +45,19 @@ LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 
 		} break;
 
+		case WM_PAINT: {
+			PAINTSTRUCT ps;
+			HDC hdc = BeginPaint(hwnd, &ps);
+			// draw the contents of the window here
+			EndPaint(hwnd, &ps);
+			// force a redraw of the bottom line
+			RECT rect;
+			GetClientRect(hwnd, &rect);
+			rect.top = rect.bottom - 1;
+			InvalidateRect(hwnd, &rect, FALSE);
+			UpdateWindow(hwnd);
+		}
+
 		default: {
 			result = DefWindowProc(hwnd, uMsg, wParam, lParam);
 		}
@@ -95,6 +108,7 @@ Window::Window(LPCWSTR title, bool fullscreen, Handler* handler) {
 	HWND window;
 
 	if (fullscreen) {
+		SetProcessDPIAware();
 		window = CreateWindow(window_class.lpszClassName, title, WS_POPUP | WS_VISIBLE, 0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), 0, 0, m_hInstance, 0);
 	} else {
 		window = CreateWindow(window_class.lpszClassName, title, WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, Window::width, Window::height, 0, 0, m_hInstance, 0);
@@ -104,7 +118,7 @@ Window::Window(LPCWSTR title, bool fullscreen, Handler* handler) {
 	RECT rect;
 	GetWindowRect(wind, &rect); // get the dimensions of the window
 	Window::width = rect.right - rect.left; // calculate the width of the window
-	Window::height = rect.bottom - rect.top; // calculate the height of the window
+	Window::height = (rect.bottom - rect.top); // calculate the height of the window
 
 	isFull = true;
 
@@ -156,6 +170,7 @@ Window::Window(LPCWSTR title, int width, int height, bool fullscreen, Handler* h
 	HWND window;
 
 	if (fullscreen) {
+		SetProcessDPIAware();
 		window = CreateWindow(window_class.lpszClassName, title, WS_POPUP | WS_VISIBLE, 0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), 0, 0, m_hInstance, 0);
 	} else {
 		window = CreateWindow(window_class.lpszClassName, title, WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, Window::width, Window::height, 0, 0, m_hInstance, 0);
@@ -177,6 +192,8 @@ Window::Window(LPCWSTR title, int width, int height, bool fullscreen, Handler* h
 
 Window::~Window() {
 	const wchar_t* CLASS_NAME = L"Hugos Window Class";
+
+	delete handler;
 
 	UnregisterClass(CLASS_NAME, m_hInstance);
 }

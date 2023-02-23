@@ -102,6 +102,7 @@ class Box : public GameObject, public Clickable {
 		void draw() {
 			setColor(color);
 			fillRect();
+			Renderer::drawImage(ImageLoader::bufferImage("C:\\Users\\jeffr\\OneDrive\\Pictures\\watermelon.jpg"));
 			
 			//Renderer::drawLine(Window::getWidth() / 2, Window::getHeight() / 2, mouse.x + (Window::getWidth() / 2), mouse.y + (Window::getHeight() / 2), color);
 		}
@@ -109,6 +110,49 @@ class Box : public GameObject, public Clickable {
 			color = ORANGE;
 		}
 };
+
+class Dot : public GameObject {
+	public:
+	unsigned int color = WHITE;
+	//Vector mouse;
+	float speed;
+	//float velocity, acceleration;
+	Vector gravity = Vector(0, 0.1);
+
+	Dot(int x, int y, int size, int mass) {
+		setRect(x, y, size, size);
+		speed = 0;
+		this->mass = mass;
+		//velocity = 0.0;
+		//acceleration = 0.0001;
+	}
+	void update() {
+		applyForce(Vector(0.0001, 0));
+
+		if (position.y + height >= Window::getHeight()) {
+			velocity.y *= -1;
+			position.y = Window::getHeight() - height;
+		}
+		if (position.y <= 0) {
+			velocity.y *= -1;
+			position.y = 0;
+		}
+
+		if (position.x <= 0) {
+			velocity.x *= -1;
+			position.x = 0;
+		}
+		if (position.x + width >= Window::getWidth()) {
+			velocity.x *= -1;
+			position.x = Window::getWidth() - width;
+		}
+	}
+	void draw() {
+		setColor(color);
+		fillRect();
+	}
+};
+
 
 int main() {
 	/*
@@ -162,23 +206,28 @@ int main() {
 
 	//Water* water = new Water(100, 100, 100, 100, 0.1);
 
-	Pizza* engine = new Pizza(L"Hello there");
+	Pizza* engine = new Pizza(L"Hello there", true);
 
-	Fluid* f = new Fluid(0, Window::getHeight() - 300, Window::getWidth(), Window::getHeight(), 0.1);
+	Fluid* f = new Fluid(0, Window::getHeight() - 300, Window::getWidth() / 2, 300, 0.1);
 	f->stable = true;
 	f->collidable = false;
 
-	//engine->showConsole();
+	engine->showConsole();
 	//engine->addObject(f);
 	engine->addObject(new Box(10, 100, 20));
 	other = new Box(100, 100, 100);
 	//engine->addObject(water);
-	engine->addObject(other);
-	engine->addObject(new Box(200, 200, 5));
+	//engine->addObject(other);
+	//engine->addObject(new Box(200, 200, 5));
 
+	int size = 2;
 
+	for (int i = 10; i < 1200; i += size) {
+		//engine->addObject(new Dot(i, i + 5, size, 1));
+	}
 
 	engine->game->gravity = Vector(0, 0.0001);
+
 	//engine->setFPS(120);
 	engine->start();
 }

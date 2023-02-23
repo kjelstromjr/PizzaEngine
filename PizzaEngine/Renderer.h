@@ -4,6 +4,7 @@
 
 #include "Render.h";
 #include <cmath>
+#include "BufferedImage.h"
 
 #define WHITE		0xFFFFFF
 #define BLACK		0x00
@@ -26,6 +27,7 @@ class Renderer {
 		static void fillRectInPixels(int x0, int y0, int x1, int y1, unsigned int color);
 		static void fillRect(int x, int y, int width, int height, unsigned int color);
 		static void drawLine(int x1, int y1, int x2, int y2, unsigned int color);
+		static void drawImage(BufferedImage* image);
 
 	private:
 		static Render_State render_state;

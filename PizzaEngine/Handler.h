@@ -8,6 +8,8 @@
 #include <iostream>
 #include "Physical.h"
 #include "Fluid.h"
+#define EXCLUDE_CODE true
+#include "ImageLoader.h"
 
 class Handler {
 	public:

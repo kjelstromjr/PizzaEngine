@@ -70,3 +70,11 @@ void Renderer::drawLine(int x1, int y1, int x2, int y2, unsigned int color) {
 		y += Yinc;
 	}
 }
+
+void Renderer::drawImage(BufferedImage* image) {
+	for (int i = 0; i < image->getWidth(); i++) {
+		for (int j = 0; j < image->getHeight(); j++) {
+			drawPixel(i, j, image->getColor(i, j));
+		}
+	}
+}
